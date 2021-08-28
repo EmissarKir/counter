@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
-  let disabledButton = count <= 0;
+const Counter = (props) => {
+  const [value, setValue] = useState(props.value);
+  let disabledButton = value <= 0;
 
-  const formCount = () => {
-    return count === 0 ? "Ноль" : count;
+  const formValue = () => {
+    return value === 0 ? "Ноль" : value;
   };
 
   const getBadgeClasses = () => {
     let classes = "badge m-2 bg-";
-    classes += count <= 0 ? "danger" : "primary";
+    classes += value <= 0 ? "danger" : "primary";
 
     return classes;
   };
 
   const handlerIncrement = () => {
-    setCount(count + 1);
+    setValue(value + 1);
   };
 
   const handlerDecrement = () => {
-    setCount(count - 1);
+    setValue(value - 1);
   };
 
   return (
-    <>
-      <span className={getBadgeClasses()}>{formCount()}</span>
+    <div>
+      <h4>{props.name}</h4>
+      <span className={getBadgeClasses()}>{formValue()}</span>
       <button onClick={handlerIncrement} className="btn btn-primary btn-sm m-2">
         Increment
       </button>
@@ -36,7 +37,7 @@ const Counter = () => {
       >
         Decrement
       </button>
-    </>
+    </div>
   );
 };
 
