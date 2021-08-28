@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Counter = (props) => {
+  console.log("props", props);
   const [value, setValue] = useState(props.value);
   let disabledButton = value <= 0;
 
@@ -37,6 +38,12 @@ const Counter = (props) => {
       >
         Decrement
       </button>
+      <div
+        className="button btn btn-danger btn-sm m-2"
+        onClick={() => props.onDelete(props.id)}
+      >
+        Delete
+      </div>
     </div>
   );
 };
