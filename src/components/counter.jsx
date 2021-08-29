@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Counter = (props) => {
-  console.log("props", props);
-  const [value, setValue] = useState(props.value);
+const Counter = ({ value, name, id, onDecrement, onIncrement, onDelete }) => {
   let disabledButton = value <= 0;
 
   const formValue = () => {
@@ -16,23 +14,18 @@ const Counter = (props) => {
     return classes;
   };
 
-  const handlerIncrement = () => {
-    setValue(value + 1);
-  };
-
-  const handlerDecrement = () => {
-    setValue(value - 1);
-  };
-
   return (
     <div>
-      <h4>{props.name}</h4>
+      <h4>{name}</h4>
       <span className={getBadgeClasses()}>{formValue()}</span>
-      <button onClick={handlerIncrement} className="btn btn-primary btn-sm m-2">
+      <button
+        onClick={() => onIncrement(id)}
+        className="btn btn-primary btn-sm m-2"
+      >
         Increment
       </button>
       <button
-        onClick={handlerDecrement}
+        onClick={() => onDecrement(id)}
         className="btn btn-secondary btn-sm"
         disabled={disabledButton}
       >
@@ -40,7 +33,7 @@ const Counter = (props) => {
       </button>
       <div
         className="button btn btn-danger btn-sm m-2"
-        onClick={() => props.onDelete(props.id)}
+        onClick={() => onDelete(id)}
       >
         Delete
       </div>
